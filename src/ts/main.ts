@@ -2,10 +2,6 @@
 
 function isAnagramm(str1: string, str2: string): boolean {
 
-    if ((typeof str1 !== 'string') || (typeof str2 !== 'string')) {
-        throw new Error("Wrong arguments type");
-    }
-
     if (str1.length !== str2.length) {
         return false;
     }
@@ -24,10 +20,6 @@ function isAnagramm(str1: string, str2: string): boolean {
 
 function digitInNamber(number: number, index: number): number {
 
-    if (typeof number !== "number") {
-        throw new Error("Wrong arguments type");
-    }
-
     number = Math.abs(number);
     index = index || 1;
 
@@ -40,10 +32,6 @@ function digitInNamber(number: number, index: number): number {
 // Реализовать функцию которая проверяет, является ли строка палиндромом
 
 function withoutPunct(string: string): string {
-
-    if (typeof string !== 'string') {
-        throw new Error("Wrong arguments type");
-    }
 
     let stringWithoutPunct: string = '';
 
@@ -62,10 +50,6 @@ function withoutPunct(string: string): string {
 
 function isPalindrom(string: string): boolean {
 
-    if (typeof string !== 'string') {
-        throw new Error("Wrong arguments type");
-    }
-
     let onlyLeter: string = withoutPunct(string).toLowerCase();
     onlyLeter = onlyLeter.replace(/\s+/g, '');
 
@@ -82,10 +66,6 @@ function isPalindrom(string: string): boolean {
 //Написать функцию которая вычисляет подсчет уникальных слов в предложении
 
 function uniqueWords(string: string): number {
-
-    if (typeof string !== 'string') {
-        throw new Error("Wrong arguments type");
-    }
 
     let stringWithoutPunct: string = withoutPunct(string);
     let unique: number = 0;
@@ -112,10 +92,6 @@ function uniqueWords(string: string): number {
 // Написать функцию которая вычисляет вхождение каждого слова в предложение
 
 function wordsCount(string: string): {} {
-
-    if (typeof string !== 'string') {
-        throw new Error("Wrong arguments type");
-    }
 
     let stringWithoutPunct: string = withoutPunct(string).toLowerCase();
     let wordsCount: { [key: string]: number } = {};
@@ -296,9 +272,6 @@ let sumOddPositivFunc = function (item: number): number {
 
 
 function sumArr(arr: number[], callback: (item: number) => number) {
-    if (((callback) && (typeof callback !== 'function')) || (!Array.isArray(arr))) {
-        throw new Error("Wrong arguments type");
-    }
 
     let sum = 0;
     for (let i = 0; i < arr.length; i++) {
@@ -311,10 +284,6 @@ function sumArr(arr: number[], callback: (item: number) => number) {
 }
 
 function sumRecurs(arr: number[], sum: number, index: number): number {
-
-    if (!Array.isArray(arr)) {
-        throw new Error("Wrong arguments type");
-    }
 
     sum = sum || 0;
     index = index || 0;
@@ -331,10 +300,6 @@ function sumRecurs(arr: number[], sum: number, index: number): number {
 
 function nullNumb(arr: number[]) {
 
-    if (!Array.isArray(arr)) {
-        throw new Error("Wrong arguments type");
-    }
-
     let count = 0;
 
     for (let i = 0; i < arr.length; i++) {
@@ -347,10 +312,6 @@ function nullNumb(arr: number[]) {
 }
 
 function positivNumb(arr: number[]) {
-
-    if (!Array.isArray(arr)) {
-        throw new Error("Wrong arguments type");
-    }
 
     let count = 0;
 
@@ -365,10 +326,6 @@ function positivNumb(arr: number[]) {
 
 function negativNumb(arr: number[]) {
 
-    if (!Array.isArray(arr)) {
-        throw new Error("Wrong arguments type");
-    }
-
     let count = 0;
 
     for (let i = 0; i < arr.length; i++) {
@@ -381,10 +338,6 @@ function negativNumb(arr: number[]) {
 }
 
 function primeNumb(arr: number[]) {
-
-    if (!Array.isArray(arr)) {
-        throw new Error("Wrong arguments type");
-    }
 
     let count = 0;
     let flag = false;
@@ -411,10 +364,6 @@ function primeNumb(arr: number[]) {
 
 function toBinary(numb: number): string {
 
-    if (typeof numb !== 'number') {
-        throw new Error("Wrong arguments type");
-    }
-
     let binaryRevers = '';
     let oneBit = 1;
 
@@ -438,10 +387,6 @@ function toBinary(numb: number): string {
 
 function toDex(binary: string): number {
 
-    if (typeof binary !== 'string') {
-        throw new Error("Wrong arguments type");
-    }
-
     let multiplier = 1;
     let dex = 0;
 
@@ -461,10 +406,6 @@ function toDex(binary: string): number {
 
 function twoDemensArray(arr: number[][], func: (item: number) => number): number {
 
-    if (!Array.isArray(arr)) {
-        throw new Error("Wrong arguments type");
-    }
-
     let sum = 0;
 
     for (let i = 0; i < arr.length; i++) {
@@ -481,10 +422,6 @@ function twoDemensArray(arr: number[][], func: (item: number) => number): number
 
 function sumMinToMax(min: number, max: number, sum: number): number {
 
-    if ((typeof min !== "number") || (typeof min !== "number")) {
-        throw new Error("Wrong arguments type");
-    }
-
     min = min + 1;
     sum = sum || 0;
     sum = sum + min;
@@ -497,10 +434,6 @@ function sumMinToMax(min: number, max: number, sum: number): number {
 }
 
 function sumMinToMaxMultThree(min: number, max: number, sum: number): number {
-
-    if ((typeof min !== "number") || (typeof min !== "number")) {
-        throw new Error("Wrong arguments type");
-    }
 
     min = min + 1;
     sum = sum || 0;
@@ -518,10 +451,6 @@ function sumMinToMaxMultThree(min: number, max: number, sum: number): number {
 
 function sumMinToMaxPositiv(min: number, max: number, sum: number): number {
 
-    if ((typeof min !== "number") || (typeof min !== "number")) {
-        throw new Error("Wrong arguments type");
-    }
-
     min = min + 1;
     sum = sum || 0;
 
@@ -537,10 +466,6 @@ function sumMinToMaxPositiv(min: number, max: number, sum: number): number {
 }
 
 function sumMinToMaxCycle(min: number, max: number): number {
-
-    if ((typeof min !== "number") || (typeof min !== "number")) {
-        throw new Error("Wrong arguments type");
-    }
 
     let sum = 0;
 
@@ -559,9 +484,6 @@ interface Result {
 }
 
 function averageArrSum(arr: number[]): Result {
-    if (typeof arr === 'number') {
-        throw new Error("Wrong arguments type");
-    }
 
     let sum = 0;
     let count = 0;
@@ -609,11 +531,7 @@ function average(arr: number[], callback: (arrIn: number[]) => Result): number;
 
 function average(arr: number[][], callback: (arrIn: number[]) => Result): number;
 
-function average(arr: any, callback: (arrIn: number[]) => Result): number {
-
-    if (!Array.isArray(arr) || ((callback) && (typeof callback !== 'function'))) {
-        throw new Error("Wrong arguments type");
-    }
+function average(arr: number[]|number[][], callback: (arrIn: number[]) => Result): number {
 
     let count = 0;
     let sum = 0;
@@ -622,7 +540,7 @@ function average(arr: any, callback: (arrIn: number[]) => Result): number {
         let arrIn = arr[i];
 
         if (typeof arrIn === 'number') {
-            let callbackResult = callback(arr);
+            let callbackResult = callback(arr as number[]);
             return callbackResult.sum / callbackResult.count;
 
         }
@@ -638,17 +556,11 @@ function average(arr: any, callback: (arrIn: number[]) => Result): number {
 
 }
 
-let a = average([1, 2, 3], averageArrSum);
-
 //Транспонировать матрицу, сложить две матрицы.
 
 type Matrix = number[][];
 
 function transponMatrix(matrix: Matrix) {
-
-    if (!Array.isArray(matrix)) {
-        throw new Error("Wrong arguments type");
-    }
 
     let newMatrix: Matrix = [];
 
@@ -670,10 +582,6 @@ function transponMatrix(matrix: Matrix) {
 
 function sumMatrix(matrix1: Matrix, matrix2: Matrix) {
 
-    if ((!Array.isArray(matrix1)) || (!Array.isArray(matrix2))) {
-        throw new Error("Wrong arguments type");
-    }
-
     let sumMatr: Matrix = [];
 
     for (let i = 0; i < matrix1.length; i++) {
@@ -691,10 +599,6 @@ function sumMatrix(matrix1: Matrix, matrix2: Matrix) {
 // Удалить из двумерного массива строку в которой присутствует хотя бы один нулевой элемент. Для столбца аналогично реализовать.
 
 function deleteStrngWithNull(arr: Matrix, index?: number): Matrix | [] {
-
-    if (!Array.isArray(arr)) {
-        throw new Error("Wrong arguments type");
-    }
 
     index = index || 0;
     let arrString = arr[index];
@@ -719,10 +623,6 @@ function deleteStrngWithNull(arr: Matrix, index?: number): Matrix | [] {
 }
 
 function deleteColumnWithNull(arr: Matrix, index?: number): Matrix | [][] {
-
-    if (!Array.isArray(arr)) {
-        throw new Error("Wrong arguments type");
-    }
 
     index = index || 0;
     let arrString = arr[index];
@@ -796,10 +696,6 @@ let countNullOverDiagonalMatrix: Callback = function (arr, i) {
 
 function calculationMatrix(matrix: Matrix, callback: Callback) {
 
-    if (!Array.isArray(matrix)) {
-        throw new Error("Wrong arguments type");
-    }
-
     for (let i = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
@@ -818,10 +714,6 @@ function calculationMatrix(matrix: Matrix, callback: Callback) {
 }
 
 function avarageUnderDiagonalMatrix(matrix: Matrix) {
-
-    if (!Array.isArray(matrix)) {
-        throw new Error("Wrong arguments type");
-    }
 
     for (let i = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
@@ -845,10 +737,6 @@ function avarageUnderDiagonalMatrix(matrix: Matrix) {
 
 function avarageOverDiagonalMatrix(matrix: Matrix) {
 
-    if (!Array.isArray(matrix)) {
-        throw new Error("Wrong arguments type");
-    }
-
     for (let i = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
@@ -871,10 +759,6 @@ function avarageOverDiagonalMatrix(matrix: Matrix) {
 
 function DiagonalMatrixSum(matrix: Matrix) {
 
-    if (!Array.isArray(matrix)) {
-        throw new Error("Wrong arguments type");
-    }
-
     for (let i = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
@@ -895,10 +779,6 @@ function DiagonalMatrixSum(matrix: Matrix) {
 
 function DiagonalMatrixNull(matrix: Matrix) {
 
-    if (!Array.isArray(matrix)) {
-        throw new Error("Wrong arguments type");
-    }
-
     for (let i = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
@@ -917,10 +797,6 @@ function DiagonalMatrixNull(matrix: Matrix) {
 }
 
 function DiagonalMatrixAvarage(matrix: Matrix) {
-
-    if (!Array.isArray(matrix)) {
-        throw new Error("Wrong arguments type");
-    }
 
     for (let i = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
@@ -950,12 +826,12 @@ interface Next {
 
 interface FibonachiIterator {
     num: number;
-    [Symbol.iterator](): { next(): IteratorResult<number, any> };
+    [Symbol.iterator](): { next(): IteratorResult<number, boolean> };
 }
 
 let fibonachiIterator: FibonachiIterator = {
     num: 10,
-    [Symbol.iterator](): { next(): IteratorResult<number, any> } {
+    [Symbol.iterator](): { next(): IteratorResult<number, boolean> } {
 
         let prev = 1;
         let next = 1;
@@ -1012,10 +888,6 @@ function* fibonachiGenerator() {
 let generator = fibonachiGenerator();
 
 function recursFibonachi(index: number, arr?: number[], numb2?: number, res?: number): number[] {
-
-    if (typeof index !== "number") {
-        throw new Error("Wrong arguments type");
-    }
 
     let arrFibonachi = arr || [];
     let numb1 = 0;

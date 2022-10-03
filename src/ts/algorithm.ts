@@ -6,9 +6,9 @@ interface ObjectType {
     [key: string]: Primitive
 }
 
-type Primitive = number | string | boolean | Primitive[]
+type Primitive = number | string | boolean | Primitive[];
 
-type SortSignature<T> = (this: T[], callback: CallbackObject<T> | CallbackPrimitive<T>, property: string) => T[]
+type SortSignature<T> = (this: T[], callback: CallbackObject<T> | CallbackPrimitive<T>, property: string) => T[];
 
 let sortObjectArr: CallbackObject<ObjectType> = function (elementPrev, elementNext, property) {
     return (elementPrev[property] > elementNext[property]);
@@ -24,9 +24,9 @@ let insertionSort: SortSignature<Primitive | ObjectType> =
             throw new Error("callback is not a function");
         }
 
-        for (let i = 1; i < this.length; i++) {
-            let temporary = this[i];
-            let j = i - 1;
+        for (let i: number = 1; i < this.length; i++) {
+            let temporary: Primitive | ObjectType = this[i];
+            let j: number = i - 1;
 
             while ((j >= 0) && callback(this[j], temporary, property)) {
                 this[j + 1] = this[j];
@@ -52,11 +52,11 @@ let bubbleSort: SortSignature<Primitive | ObjectType> = function (callback, prop
         throw new Error("callback is not a function");
     }
 
-    for (let i = 0; i < this.length; i++) {
-        for (let j = 0; j < this.length - i; j++) {
+    for (let i: number = 0; i < this.length; i++) {
+        for (let j: number = 0; j < this.length - i; j++) {
 
             if (callback(this[j], this[j + 1], property)) {
-                let temporary = this[j];
+                let temporary: Primitive | ObjectType = this[j];
                 this[j] = this[j + 1];
                 this[j + 1] = temporary;
             }
@@ -75,7 +75,7 @@ Array.prototype.bubbleSort = bubbleSort;
 //  /////////////////////////////////////////////////
 
 interface NodeInterface<T> {
-    nodeValue: T | undefined,
+    nodeValue: T | null,
     left: null | NodeInterface<T>,
     right: null | NodeInterface<T>,
     add: (nodeValue: T, node?: NodeInterface<T>) => void | never;
@@ -84,10 +84,10 @@ interface NodeInterface<T> {
 }
 
 class binaryNode<T> implements NodeInterface<T>{
-    nodeValue: T | undefined;
+    nodeValue: T | null;
     left: null | NodeInterface<T>;
     right: null | NodeInterface<T>;
-    constructor(nodeValue?: T) {
+    constructor(nodeValue: T | null) {
         this.nodeValue = nodeValue;
         this.left = null;
         this.right = null;
@@ -95,7 +95,7 @@ class binaryNode<T> implements NodeInterface<T>{
 
     add(nodeValue: T, node?: NodeInterface<T>) {
         node = node || this;
-        if (node.nodeValue === undefined) {
+        if (node.nodeValue === null) {
             node.nodeValue = nodeValue;
             return;
         } else {
@@ -194,7 +194,7 @@ class binaryNode<T> implements NodeInterface<T>{
             if ((carentNode.left === null) && (carentNode.right === null)) {
 
                 if (carentNode === this) {
-                    carentNode.nodeValue = undefined;
+                    carentNode.nodeValue = null;
                     return;
                 }
 
@@ -256,7 +256,7 @@ class binaryNode<T> implements NodeInterface<T>{
             }
 
             if ((carentNode.left !== null) && (carentNode.right !== null)) {
- 
+
                 if (minElement === carentNode) {
                     parentNode = minElement;
                     minElement = carentNode.right;
@@ -285,4 +285,4 @@ class binaryNode<T> implements NodeInterface<T>{
     }
 }
 
-let binaryTree = new binaryNode();
+let binaryTree = new binaryNode(null);

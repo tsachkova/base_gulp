@@ -1,20 +1,14 @@
+type ArreyUnsortType = Primitive |symbol| Function|{ [key: string | number | symbol]: Primitive };
 
-type ArreyType = number | string | boolean | any[] | symbol | { [key: string | number | symbol]: any }
+type MapCustom<T, Q> = (this: T[], callback: (item: T, index: number, arr: T[]) => Q) => Q[] | never;
 
-type CallbackMap<T> = (item: T, index: number, arr: T[]) => any
-
-type MapCustom<T> = (this: T[], callback: CallbackMap<T>) => any[] | never
-
-
-let customMap: MapCustom<ArreyType> = function (this, callback) {
+let customMap: MapCustom<ArreyUnsortType, ArreyUnsortType> = function (this, callback) {
     if (typeof callback !== 'function') {
         throw new Error("callback is not a function");
     }
-    let result: any[] = [];
+    let result: ArreyUnsortType[] = [];
 
-
-
-    for (let i = 0; i < this.length; i++) {
+    for (let i:number = 0; i < this.length; i++) {
 
         result.push(callback(this[i], i, this));
     }
@@ -23,7 +17,7 @@ let customMap: MapCustom<ArreyType> = function (this, callback) {
 }
 
 declare interface Array<T> {
-    customMap: MapCustom<T>
+    customMap: MapCustom<T, ArreyUnsortType>
 }
 
 Array.prototype.customMap = customMap;
@@ -32,16 +26,15 @@ Array.prototype.customMap = customMap;
 
 type CallbackFilter<T> = (item: T, index: number, arr: T[]) => T;
 
-type FilterCustom<T> = (this: T[], callback: CallbackFilter<T>) => T[] | never
+type FilterCustom<T> = (this: T[], callback: CallbackFilter<T>) => T[] | never;
 
-
-let customFilter: FilterCustom<ArreyType> = function (this: ArreyType[], callback) {
+let customFilter: FilterCustom<ArreyUnsortType> = function (this: ArreyUnsortType[], callback) {
     if (typeof callback !== 'function') {
         throw new Error("callback is not a function");
     }
-    let result: ArreyType[] = [];
+    let result: ArreyUnsortType[] = [];
 
-    for (let i = 0; i < this.length; i++) {
+    for (let i:number = 0; i < this.length; i++) {
         if (callback(this[i], i, this)) {
             result.push(this[i]);
         }
@@ -58,17 +51,17 @@ Array.prototype.customFilter = customFilter;
 
 // ///////////////////////////////////////
 
-type ReduceCallback<T> = (accum: T | any, carrent: T, index: number, arr: T[]) => any;
+type ReduceCallback<T, Q> = (accum: T | ArreyUnsortType, carrent: T, index: number, arr: T[]) => Q;
 
-type ReduceCustom<T> = (this: T[], callback: ReduceCallback<T>, initialValue?: any) => any;
+type ReduceCustom<T, Q> = (this: T[], callback: ReduceCallback<T, Q>, initialValue?: ArreyUnsortType) => Q;
 
-let customReduce: ReduceCustom<ArreyType> = function (this, callback, initialValue) {
+let customReduce: ReduceCustom<ArreyUnsortType, ArreyUnsortType> = function (this, callback, initialValue) {
     if (typeof callback !== 'function') {
         throw new Error("callback is not a function");
     }
 
-    let previous: ArreyType;
-    let cycleStart = 0;
+    let previous: ArreyUnsortType;
+    let cycleStart:number = 0;
 
     if (initialValue) {
         previous = initialValue;
@@ -77,7 +70,7 @@ let customReduce: ReduceCustom<ArreyType> = function (this, callback, initialVal
         cycleStart = 1;
     }
 
-    for (let i = cycleStart; i < this.length; i++) {
+    for (let i:number = cycleStart; i < this.length; i++) {
         previous = callback(previous, this[i], i, this);
     }
 
@@ -85,7 +78,7 @@ let customReduce: ReduceCustom<ArreyType> = function (this, callback, initialVal
 }
 
 declare interface Array<T> {
-    customReduce: ReduceCustom<T>
+    customReduce: ReduceCustom<T, ArreyUnsortType>
 }
 
 Array.prototype.customReduce = customReduce;
@@ -96,12 +89,12 @@ type FindCallback<T> = (item: T, index: number, array: T[]) => boolean;
 
 type FindCustom<T> = (this: T[], callback: FindCallback<T>) => T | undefined;
 
-let customFind: FindCustom<ArreyType> = function (this, callback) {
+let customFind: FindCustom<ArreyUnsortType> = function (this, callback) {
     if (typeof callback !== 'function') {
         throw new Error("callback is not a function");
     }
 
-    for (let i = 0; i < this.length; i++) {
+    for (let i:number = 0; i < this.length; i++) {
         if (callback(this[i], i, this)) {
             return this[i];
         }
@@ -118,21 +111,23 @@ Array.prototype.customFind = customFind;
 
 type ForEachCustom<T> = (this: T[], callback: (item: T, index: number, arr: T[]) => void) => void
 
-let customForEach: ForEachCustom<ArreyType> = function (callback) {
+let customForEach: ForEachCustom<ArreyUnsortType> = function (callback) {
     if (typeof callback !== 'function') {
         throw new Error("callback is not a function");
     }
 
-    for (let i = 0; i < this.length; i++) {
+    for (let i:number = 0; i < this.length; i++) {
         callback(this[i], i, this);
     }
 }
 
 // ///////////////////////////////////////////
 
-type obj = { [key: string | number | symbol]: any };
+interface objFunction { [key:symbol]: Function }
 
-type BindCustome = (customThis: obj, ...rest: any[]) => (arg?: any[]) => Function;
+interface obj extends objFunction{ [key: string | number]: ArreyUnsortType };
+
+type BindCustome = (customThis: obj, ...rest: ArreyUnsortType[]) => (arg?:ArreyUnsortType[]) => Function;
 
 let customBind: BindCustome = function (this: Function, customThis, ...rest) {
     let targetFunc = this;
@@ -154,7 +149,7 @@ Function.prototype.customBind = customBind;
 
 // //////////////////////////////////////////
 
-type CallCustome = (this: Function, customThis: obj, ...rest: any[]) => any
+type CallCustome = (this: Function, customThis: obj, ...rest: ArreyUnsortType[]) => void
 
 let customCall: CallCustome = function (customThis, ...rest) {
     let keyName = Symbol('keyName');
@@ -168,4 +163,3 @@ declare interface Function {
 }
 
 Function.prototype.customCall = customCall;
-
