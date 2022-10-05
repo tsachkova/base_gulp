@@ -6,7 +6,7 @@ function isAnagramm(str1: string, str2: string): boolean {
         return false;
     }
 
-    for (let i:number = 0; i < str1.length; i++) {
+    for (let i: number = 0; i < str1.length; i++) {
         let letter: string = str1[i];
         if (str2.indexOf(letter) !== -1) {
             str2 = str2.replace(str1[i], '');
@@ -35,7 +35,7 @@ function withoutPunct(string: string): string {
 
     let stringWithoutPunct: string = '';
 
-    for (let i:number = 0; i < string.length; i++) {
+    for (let i: number = 0; i < string.length; i++) {
         let letter: string = string[i];
         let allLetter: string = '!"#$%&()*+,-./:;<=>?@[\]^_{|}~';
 
@@ -52,7 +52,7 @@ function isPalindrom(string: string): boolean {
     let onlyLeter: string = withoutPunct(string).toLowerCase();
     onlyLeter = onlyLeter.replace(/\s+/g, '');
 
-    for (let i:number  = 0; i < onlyLeter.length; i++) {
+    for (let i: number = 0; i < onlyLeter.length; i++) {
         let lastLetter: number = onlyLeter.length - 1;
         if (onlyLeter[i] !== onlyLeter[(lastLetter - i)]) {
             return false;
@@ -70,11 +70,11 @@ function uniqueWords(string: string): number {
     let unique: number = 0;
     let arrString: string[] = stringWithoutPunct.split(' ');
 
-    for (let i:number = 0; i < arrString.length; i++) {
-        let word:string = arrString[i];
+    for (let i: number = 0; i < arrString.length; i++) {
+        let word: string = arrString[i];
         let isRepeats: boolean = false;
 
-        for (let j:number  = 0; j < arrString.length; j++) {
+        for (let j: number = 0; j < arrString.length; j++) {
 
             if ((word === arrString[j]) && (i !== j)) {
                 isRepeats = true;
@@ -96,7 +96,7 @@ function wordsCount(string: string): {} {
     let wordsCount: { [key: string]: number } = {};
     let arrString: string[] = stringWithoutPunct.split(' ');
 
-    for (let i:number  = 0; i < arrString.length; i++) {
+    for (let i: number = 0; i < arrString.length; i++) {
 
         if (!wordsCount[arrString[i]]) {
             wordsCount[arrString[i]] = 1;
@@ -198,7 +198,7 @@ type FactorialCalc = (customNumber: number, result?: number) => CashCalculetion
 function factorialCash(): FactorialCalc {
 
     let cashCalculetion: CashCalculetion = {};
-    let factor:number = 1;
+    let factor: number = 1;
 
     return function factorialCalc(customNumber: number, result?: number): CashCalculetion {
 
@@ -217,12 +217,12 @@ function factorialCash(): FactorialCalc {
     }
 }
 
-let factorial:FactorialCalc = factorialCash();
+let factorial: FactorialCalc = factorialCash();
 
 let memoiz = function () {
 
     let cash: CashCalculetion = {};
-    let maxCash:number = 0;
+    let maxCash: number = 0;
 
     return function (customNumber: number) {
 
@@ -275,7 +275,7 @@ let oddPositivItemCallback = function (item: number): number {
 function sumArreyItem(arr: number[], callback?: (item: number) => number) {
 
     let sum = 0;
-    for (let i:number  = 0; i < arr.length; i++) {
+    for (let i: number = 0; i < arr.length; i++) {
         if (!callback) {
             sum += arr[i];
         } else {
@@ -302,9 +302,9 @@ function sumRecurs(arr: number[], sum: number, index: number): number {
 
 function nullNumb(arr: number[]) {
 
-    let count:number = 0;
+    let count: number = 0;
 
-    for (let i:number  = 0; i < arr.length; i++) {
+    for (let i: number = 0; i < arr.length; i++) {
         if (arr[i] === 0) {
             ++count;
         }
@@ -315,9 +315,9 @@ function nullNumb(arr: number[]) {
 
 function positivNumb(arr: number[]) {
 
-    let count:number = 0;
+    let count: number = 0;
 
-    for (let i:number  = 0; i < arr.length; i++) {
+    for (let i: number = 0; i < arr.length; i++) {
         if (arr[i] > 0) {
             ++count;
         }
@@ -328,9 +328,9 @@ function positivNumb(arr: number[]) {
 
 function negativNumb(arr: number[]) {
 
-    let count:number = 0;
+    let count: number = 0;
 
-    for (let i:number  = 0; i < arr.length; i++) {
+    for (let i: number = 0; i < arr.length; i++) {
         if (arr[i] < 0) {
             ++count;
         }
@@ -341,13 +341,13 @@ function negativNumb(arr: number[]) {
 
 function primeNumb(arr: number[]) {
 
-    let count:number = 0;    
-    let isPrimeNumb:boolean = true;
+    let count: number = 0;
+    let isPrimeNumb: boolean = true;
 
-    for (let i:number = 0; i < arr.length; i++) {
+    for (let i: number = 0; i < arr.length; i++) {
         if (arr[i] > 0) {
 
-            for (let j:number  = 2; j < arr[i]; j++) {
+            for (let j: number = 2; j < arr[i]; j++) {
                 if ((arr[i] % j === 0)) {
                     isPrimeNumb = false;
                     break;
@@ -355,7 +355,7 @@ function primeNumb(arr: number[]) {
             }
 
             if (isPrimeNumb) {
-            count++
+                count++
             } else {
                 isPrimeNumb = true;
             }
@@ -369,8 +369,8 @@ function primeNumb(arr: number[]) {
 
 function toBinary(numb: number): string {
 
-    let binaryRevers:string = '';
-    let oneBit:number = 1;
+    let binaryRevers: string = '';
+    let oneBit: number = 1;
 
     while (oneBit <= numb) {
 
@@ -381,9 +381,9 @@ function toBinary(numb: number): string {
         oneBit <<= 1;
     }
 
-    let binary:string = '';
+    let binary: string = '';
 
-    for (let i:number  = binaryRevers.length - 1; i >= 0; i--) {
+    for (let i: number = binaryRevers.length - 1; i >= 0; i--) {
         binary = binary + binaryRevers.charAt(i);
     }
 
@@ -392,10 +392,10 @@ function toBinary(numb: number): string {
 
 function toDex(binary: string): number {
 
-    let multiplier:number = 1;
-    let dex:number = 0;
+    let multiplier: number = 1;
+    let dex: number = 0;
 
-    for (let i:number  = binary.length - 1; i >= 0; i--) {
+    for (let i: number = binary.length - 1; i >= 0; i--) {
 
         if (binary[i] === '1') {
             dex = dex + multiplier;
@@ -411,9 +411,9 @@ function toDex(binary: string): number {
 
 function twoDemensSumArray(arr: number[][], func?: (item: number) => number): number {
 
-    let sum:number = 0;
+    let sum: number = 0;
 
-    for (let i:number  = 0; i < arr.length; i++) {
+    for (let i: number = 0; i < arr.length; i++) {
         sum += sumArreyItem(arr[i], func);
     }
 
@@ -472,7 +472,7 @@ function sumNumberMinMaxCycle(min: number, max: number): number {
 
     let sum = 0;
 
-    for (let i:number = min + 1; i < max; i++) {
+    for (let i: number = min + 1; i < max; i++) {
         sum = sum + i;
     }
 
@@ -491,7 +491,7 @@ function averageArrey(arr: number[]): Result {
     let sum = 0;
     let count = 0;
 
-    for (let j:number  = 0; j < arr.length; j++) {
+    for (let j: number = 0; j < arr.length; j++) {
         sum += arr[j];
         ++count;
     }
@@ -504,7 +504,7 @@ function averageEvenArrey(arr: number[]): Result {
     let sum = 0;
     let count = 0;
 
-    for (let j:number  = 0; j < arr.length; j++) {
+    for (let j: number = 0; j < arr.length; j++) {
         if (arr[j] % 2 === 0) {
             sum += arr[j];
             ++count;
@@ -518,7 +518,7 @@ function avarageOddSum(arr: number[]): Result {
     let sum = 0;
     let count = 0;
 
-    for (let j:number  = 0; j < arr.length; j++) {
+    for (let j: number = 0; j < arr.length; j++) {
         if (arr[j] % 2 !== 0) {
             sum += arr[j];
             ++count;
@@ -532,15 +532,15 @@ function avarageOddSum(arr: number[]): Result {
 
 function averageDoubleArrey(arr: number[][], callback: (arrIn: number[]) => Result): number {
     let sumDoubleArrey = 0;
-    let countDoubleArrey  = 0;
+    let countDoubleArrey = 0;
 
-    for (let i:number  = 0; i < arr.length; i++) {
-        let {sum, count} = callback(arr[i]);
+    for (let i: number = 0; i < arr.length; i++) {
+        let { sum, count } = callback(arr[i]);
         sumDoubleArrey += sum;
         countDoubleArrey += count;
     }
 
-    return sumDoubleArrey/countDoubleArrey;
+    return sumDoubleArrey / countDoubleArrey;
 }
 
 
@@ -552,10 +552,10 @@ function transponMatrix(matrix: Matrix) {
 
     let newMatrix: Matrix = [];
 
-    for (let j:number  = 0; j < matrix.length; j++) {
-        let matrixRow:number[] = matrix[j];
+    for (let j: number = 0; j < matrix.length; j++) {
+        let matrixRow: number[] = matrix[j];
 
-        for (let i:number  = 0; i < matrixRow.length; i++) {
+        for (let i: number = 0; i < matrixRow.length; i++) {
             if (j === 0) {
                 newMatrix.push([]);
             }
@@ -572,11 +572,11 @@ function sumMatrix(matrix1: Matrix, matrix2: Matrix) {
 
     let sumMatr: Matrix = [];
 
-    for (let i:number  = 0; i < matrix1.length; i++) {
+    for (let i: number = 0; i < matrix1.length; i++) {
         sumMatr.push([]);
-        let matrixRow1:number[] = matrix1[i];
-        let matrixRow2:number[] = matrix2[i];
-        for (let j:number  = 0; j < matrixRow1.length; j++) {
+        let matrixRow1: number[] = matrix1[i];
+        let matrixRow2: number[] = matrix2[i];
+        for (let j: number = 0; j < matrixRow1.length; j++) {
             sumMatr[i][j] = matrixRow1[j] + matrixRow2[j];
         }
     }
@@ -589,9 +589,9 @@ function sumMatrix(matrix1: Matrix, matrix2: Matrix) {
 function deleteStrngNull(arr: Matrix, index?: number): Matrix {
 
     index = index || 0;
-    let arrString:number[] = arr[index];
-    
-    for (let i:number  = 0; i < arrString.length; i++) {
+    let arrString: number[] = arr[index];
+
+    for (let i: number = 0; i < arrString.length; i++) {
         if (arrString[i] === 0) {
             arr.splice(index, 1);
             --index;
@@ -605,15 +605,15 @@ function deleteStrngNull(arr: Matrix, index?: number): Matrix {
     return arr;
 }
 
-function deleteColumnNull(arr: Matrix, index?: number): Matrix  {
+function deleteColumnNull(arr: Matrix, index?: number): Matrix {
 
     index = index || 0;
-    let arrString:number[] = arr[index];
+    let arrString: number[] = arr[index];
 
-    for (let i:number  = 0; i < arrString.length; i++) {
+    for (let i: number = 0; i < arrString.length; i++) {
 
         if (arrString[i] === 0) {
-            for (let j:number  = 0; j < arr.length; j++) {
+            for (let j: number = 0; j < arr.length; j++) {
                 arr[j].splice(i, 1);
 
             }
@@ -634,9 +634,9 @@ function deleteColumnNull(arr: Matrix, index?: number): Matrix  {
 type Callback = (arr: number[], i: number) => number;
 
 let underDiagonalMatrixSum: Callback = function (arr, index) {
-    let sum:number = 0;
+    let sum: number = 0;
 
-    for (let j:number  = arr.length - 1; j > index; j--) {
+    for (let j: number = arr.length - 1; j > index; j--) {
         sum += arr[j];
     }
 
@@ -644,9 +644,9 @@ let underDiagonalMatrixSum: Callback = function (arr, index) {
 }
 
 let overDiagonalMatrixSum: Callback = function (arr, index) {
-    let sum:number = 0;
+    let sum: number = 0;
 
-    for (let j:number  = 0; j < index; j++) {
+    for (let j: number = 0; j < index; j++) {
         sum += arr[j];
     }
 
@@ -654,9 +654,9 @@ let overDiagonalMatrixSum: Callback = function (arr, index) {
 }
 
 let countNullUnderDiagonalMatrix: Callback = function (arr, index) {
-    let count:number = 0;
+    let count: number = 0;
 
-    for (let j:number  = arr.length - 1; j > index; j--) {
+    for (let j: number = arr.length - 1; j > index; j--) {
         if (arr[j] === 0) {
             ++count;
         }
@@ -666,9 +666,9 @@ let countNullUnderDiagonalMatrix: Callback = function (arr, index) {
 }
 
 let countNullOverDiagonalMatrix: Callback = function (arr, index) {
-    let count:number = 0;
+    let count: number = 0;
 
-    for (let j:number  = 0; j < index; j++) {
+    for (let j: number = 0; j < index; j++) {
         if (arr[j] === 0) {
             ++count;
         }
@@ -679,15 +679,15 @@ let countNullOverDiagonalMatrix: Callback = function (arr, index) {
 
 function calculationMatrix(matrix: Matrix, callback: Callback) {
 
-    for (let i:number  = 0; i < (matrix.length - 1); i++) {
+    for (let i: number = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
         }
     }
 
-    let resultAll:number = 0;
+    let resultAll: number = 0;
 
-    for (let i:number  = 0; i < matrix.length; i++) {
+    for (let i: number = 0; i < matrix.length; i++) {
         let matrixString = matrix[i];
         resultAll += callback(matrixString, i);
     }
@@ -698,18 +698,18 @@ function calculationMatrix(matrix: Matrix, callback: Callback) {
 
 function avarageUnderDiagonalMatrix(matrix: Matrix) {
 
-    for (let i:number  = 0; i < (matrix.length - 1); i++) {
+    for (let i: number = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
         }
     }
 
-    let count:number  = 0;
-    let sum:number  = 0;
+    let count: number = 0;
+    let sum: number = 0;
 
-    for (let i:number  = 0; i < matrix.length; i++) {
-        let matrixString:number[] = matrix[i];
-        for (let j:number  = matrixString.length - 1; j > i; j--) {
+    for (let i: number = 0; i < matrix.length; i++) {
+        let matrixString: number[] = matrix[i];
+        for (let j: number = matrixString.length - 1; j > i; j--) {
             sum += matrixString[j];
             ++count;
         }
@@ -720,18 +720,18 @@ function avarageUnderDiagonalMatrix(matrix: Matrix) {
 
 function avarageOverDiagonalMatrix(matrix: Matrix) {
 
-    for (let i:number  = 0; i < (matrix.length - 1); i++) {
+    for (let i: number = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
         }
     }
 
-    let count:number  = 0;
-    let sum:number  = 0;
+    let count: number = 0;
+    let sum: number = 0;
 
-    for (let i:number  = 0; i < matrix.length; i++) {
-        let matrixString:number[] = matrix[i];
-        for (let j:number  = 0; j < i; j++) {
+    for (let i: number = 0; i < matrix.length; i++) {
+        let matrixString: number[] = matrix[i];
+        for (let j: number = 0; j < i; j++) {
             sum += matrixString[j];
             ++count;
         }
@@ -742,16 +742,16 @@ function avarageOverDiagonalMatrix(matrix: Matrix) {
 
 function DiagonalMatrixSum(matrix: Matrix) {
 
-    for (let i:number  = 0; i < (matrix.length - 1); i++) {
+    for (let i: number = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
         }
     }
 
-    let sum:number  = 0;
+    let sum: number = 0;
 
-    for (let i:number  = 0; i < matrix.length; i++) {
-        let matrixString:number[] = matrix[i];
+    for (let i: number = 0; i < matrix.length; i++) {
+        let matrixString: number[] = matrix[i];
         sum += matrixString[i];
     }
 
@@ -762,15 +762,15 @@ function DiagonalMatrixSum(matrix: Matrix) {
 
 function DiagonalMatrixNull(matrix: Matrix) {
 
-    for (let i:number  = 0; i < (matrix.length - 1); i++) {
+    for (let i: number = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
         }
     }
 
-    let nullElemCount:number  = 0;
+    let nullElemCount: number = 0;
 
-    for (let i:number  = 0; i < matrix.length; i++) {
+    for (let i: number = 0; i < matrix.length; i++) {
         if (matrix[i][i] === 0) {
             ++nullElemCount;
         }
@@ -779,18 +779,18 @@ function DiagonalMatrixNull(matrix: Matrix) {
     return nullElemCount;
 }
 
-function DiagonalMatrixAvarage(matrix: Matrix):number  {
+function DiagonalMatrixAvarage(matrix: Matrix): number {
 
-    for (let i:number  = 0; i < (matrix.length - 1); i++) {
+    for (let i: number = 0; i < (matrix.length - 1); i++) {
         if (matrix[i].length !== matrix.length) {
             throw new Error("arrey is not matrix");
         }
     }
 
-    let elemCount:number  = 0;
-    let sum :number = 0;
+    let elemCount: number = 0;
+    let sum: number = 0;
 
-    for (let j:number  = 0; j < matrix.length; j++) {
+    for (let j: number = 0; j < matrix.length; j++) {
         sum += matrix[j][j];
         ++elemCount;
     }
@@ -811,9 +811,9 @@ let fibonachiIterator: FibonachiIterator = {
     num: 10,
     [Symbol.iterator](): { next(): IteratorResult<number, boolean> } {
 
-        let prev:number  = 1;
-        let next:number  = 1;
-        let num:number  = this.num;
+        let prev: number = 1;
+        let next: number = 1;
+        let num: number = this.num;
         let res: number;
         return {
 
@@ -836,7 +836,7 @@ let fibonachiIterator: FibonachiIterator = {
     }
 };
 
-let i:number  = 0;
+let i: number = 0;
 for (let num of fibonachiIterator) {
     console.log(num)
     if (i++ > 10)
@@ -846,7 +846,7 @@ for (let num of fibonachiIterator) {
 
 
 function* fibonachiGenerator() {
-    let max:number  = 10;
+    let max: number = 10;
     let prev: number = 0;
     let next: number = 1;
     let res: number;
@@ -867,8 +867,8 @@ let generator = fibonachiGenerator();
 
 function recursFibonachi(index: number, arr?: number[], numb2?: number, res?: number): number[] {
 
-    let arrFibonachi:number[] = arr || [];
-    let numb1:number = 0;
+    let arrFibonachi: number[] = arr || [];
+    let numb1: number = 0;
     numb2 = numb2 || 1;
     res = res || 0;
 
@@ -892,7 +892,7 @@ function fibonachiMemo() {
             cash = recursFibonachi(index);
         }
         let arrResult: number[] = [];
-        for (let i:number  = 0; i < index; i++) {
+        for (let i: number = 0; i < index; i++) {
             arrResult.push(cash[i]);
         }
         return arrResult;
@@ -915,7 +915,7 @@ function* trafficLightGenerator(): Generator<"red" | "yellow" | "green", void> {
 
 let trafficLight = trafficLightGenerator();
 
-let index:number  = 0;
+let index: number = 0;
 while (true) {
     console.log(trafficLight.next().value);
     if (index++ > 10)
@@ -950,7 +950,7 @@ let trafficLightIterator = {
 
     }
 }
-let ind:number  = 0;
+let ind: number = 0;
 for (let num of trafficLightIterator) {
     console.log(num);
     if (ind++ > 10)
@@ -971,10 +971,10 @@ function isNegative(number: number) {
 }
 
 function countOfNumber(numb: number) {
-    let count:number = 0;
-    let countOne:number = 0;
-    let countZero:number = 0;
-    let oneBit:number = 1;
+    let count: number = 0;
+    let countOne: number = 0;
+    let countZero: number = 0;
+    let oneBit: number = 1;
 
     while (oneBit <= numb) {
 
@@ -1009,8 +1009,8 @@ function tildaMath(numb: number) {
 
 function tilda(number: number) {
 
-    let numb:number = number;
-    for (let i:number  = 0; i < 32; i++) {
+    let numb: number = number;
+    for (let i: number = 0; i < 32; i++) {
         numb = numb ^ (1 << i);
     }
     return numb;
