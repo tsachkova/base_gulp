@@ -148,7 +148,7 @@ class TriangClass extends Figure {
     }
 
     getSquare() {
-        let halfPer = (this.sideA + this.sideB + this.sideC) / 2;
+        let halfPer:number = (this.sideA + this.sideB + this.sideC) / 2;
         return (Math.sqrt(halfPer * (halfPer - this.sideA) * (halfPer - this.sideB) * (halfPer - this.sideC)));
     }
 
@@ -219,7 +219,7 @@ function factorialCash(): FactorialCalc {
 
 let factorial: FactorialCalc = factorialCash();
 
-let memoiz = function () {
+let memoiz: () => (customNumber: number) => number = function () {
 
     let cash: CashCalculetion = {};
     let maxCash: number = 0;
@@ -230,7 +230,7 @@ let memoiz = function () {
             return cash[customNumber];
         }
 
-        let result = factorial(customNumber);
+        let result:CashCalculetion = factorial(customNumber);
         for (let key in result) {
             if (Number(key) > maxCash) {
                 cash[key] = result[key]
@@ -242,11 +242,11 @@ let memoiz = function () {
     }
 }
 
-let memoizFactorial = memoiz();
+let memoizFactoriale:(customNumber: number) => number = memoiz();
 
 //Посчитать сумму всех элементов массива, только тех которые (Кратные двум, кратные трем, которые только положительные и нечетные), реализовать с помощью рекурсии для одномерного массива.
 
-let evenItemCallback = function (item: number): number {
+let evenItemCallback:(item: number) => number = function (item) {
 
     if (item % 2 === 0) {
         return item;
@@ -274,7 +274,7 @@ let oddPositivItemCallback = function (item: number): number {
 
 function sumArreyItem(arr: number[], callback?: (item: number) => number) {
 
-    let sum = 0;
+    let sum:number = 0;
     for (let i: number = 0; i < arr.length; i++) {
         if (!callback) {
             sum += arr[i];
@@ -470,7 +470,7 @@ function sumNumberMinMaxPositiv(min: number, max: number, sum?: number): number 
 
 function sumNumberMinMaxCycle(min: number, max: number): number {
 
-    let sum = 0;
+    let sum:number = 0;
 
     for (let i: number = min + 1; i < max; i++) {
         sum = sum + i;
@@ -488,8 +488,8 @@ interface Result {
 
 function averageArrey(arr: number[]): Result {
 
-    let sum = 0;
-    let count = 0;
+    let sum:number = 0;
+    let count:number = 0;
 
     for (let j: number = 0; j < arr.length; j++) {
         sum += arr[j];
@@ -501,8 +501,8 @@ function averageArrey(arr: number[]): Result {
 }
 
 function averageEvenArrey(arr: number[]): Result {
-    let sum = 0;
-    let count = 0;
+    let sum:number = 0;
+    let count:number = 0;
 
     for (let j: number = 0; j < arr.length; j++) {
         if (arr[j] % 2 === 0) {
@@ -515,8 +515,8 @@ function averageEvenArrey(arr: number[]): Result {
 }
 
 function avarageOddSum(arr: number[]): Result {
-    let sum = 0;
-    let count = 0;
+    let sum:number = 0;
+    let count:number = 0;
 
     for (let j: number = 0; j < arr.length; j++) {
         if (arr[j] % 2 !== 0) {
@@ -531,8 +531,8 @@ function avarageOddSum(arr: number[]): Result {
 
 
 function averageDoubleArrey(arr: number[][], callback: (arrIn: number[]) => Result): number {
-    let sumDoubleArrey = 0;
-    let countDoubleArrey = 0;
+    let sumDoubleArrey:number = 0;
+    let countDoubleArrey:number = 0;
 
     for (let i: number = 0; i < arr.length; i++) {
         let { sum, count } = callback(arr[i]);
@@ -688,7 +688,7 @@ function calculationMatrix(matrix: Matrix, callback: Callback) {
     let resultAll: number = 0;
 
     for (let i: number = 0; i < matrix.length; i++) {
-        let matrixString = matrix[i];
+        let matrixString:number[] = matrix[i];
         resultAll += callback(matrixString, i);
     }
 
@@ -863,7 +863,7 @@ function* fibonachiGenerator() {
     }
 }
 
-let generator = fibonachiGenerator();
+let generator:Generator<number, void, unknown> = fibonachiGenerator();
 
 function recursFibonachi(index: number, arr?: number[], numb2?: number, res?: number): number[] {
 
@@ -898,7 +898,7 @@ function fibonachiMemo() {
         return arrResult;
     }
 }
-let fiboMemo = fibonachiMemo();
+let fiboMemo: (index: number) => number[] = fibonachiMemo();
 
 //Реализовать с помощью итератора и генератора светофор. При каждой следующей итерации мы должны получать
 //следующий корректный цвет по логике светофора.
@@ -913,7 +913,7 @@ function* trafficLightGenerator(): Generator<"red" | "yellow" | "green", void> {
     }
 }
 
-let trafficLight = trafficLightGenerator();
+let trafficLight:Generator<"red" | "yellow" | "green", void, unknown> = trafficLightGenerator();
 
 let index: number = 0;
 while (true) {
@@ -927,7 +927,12 @@ interface NextString {
     value?: string | undefined
 }
 
-let trafficLightIterator = {
+let trafficLightIterator:{
+    num: number;
+    colors: string[];
+    [Symbol.iterator]();
+    next(): NextString;
+} = {
     num: 0,
     colors: [
         'red',
