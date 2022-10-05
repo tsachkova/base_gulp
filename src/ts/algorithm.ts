@@ -285,4 +285,4 @@ class binaryNode<T> implements NodeInterface<T>{
     }
 }
 
-let binaryTree = new binaryNode(null);
+let binaryTree:binaryNode<null> = new binaryNode(null);
