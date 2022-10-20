@@ -246,7 +246,7 @@ let memoizFactoriale:(customNumber: number) => number = memoiz();
 
 //Посчитать сумму всех элементов массива, только тех которые (Кратные двум, кратные трем, которые только положительные и нечетные), реализовать с помощью рекурсии для одномерного массива.
 
-let evenItemCallback:(item: number) => number = function (item) {
+let evenItemCallback:(item: number) => number = function (item:number) {
 
     if (item % 2 === 0) {
         return item;
@@ -633,7 +633,7 @@ function deleteColumnNull(arr: Matrix, index?: number): Matrix {
 
 type Callback = (arr: number[], i: number) => number;
 
-let underDiagonalMatrixSum: Callback = function (arr, index) {
+let underDiagonalMatrixSum: Callback = function (arr:number[], index:number) {
     let sum: number = 0;
 
     for (let j: number = arr.length - 1; j > index; j--) {
@@ -643,7 +643,7 @@ let underDiagonalMatrixSum: Callback = function (arr, index) {
     return sum;
 }
 
-let overDiagonalMatrixSum: Callback = function (arr, index) {
+let overDiagonalMatrixSum: Callback = function (arr:number[], index:number) {
     let sum: number = 0;
 
     for (let j: number = 0; j < index; j++) {
@@ -653,7 +653,7 @@ let overDiagonalMatrixSum: Callback = function (arr, index) {
     return sum;
 }
 
-let countNullUnderDiagonalMatrix: Callback = function (arr, index) {
+let countNullUnderDiagonalMatrix: Callback = function (arr:number[], index:number) {
     let count: number = 0;
 
     for (let j: number = arr.length - 1; j > index; j--) {
@@ -665,7 +665,7 @@ let countNullUnderDiagonalMatrix: Callback = function (arr, index) {
     return count;
 }
 
-let countNullOverDiagonalMatrix: Callback = function (arr, index) {
+let countNullOverDiagonalMatrix: Callback = function (arr:number[], index:number) {
     let count: number = 0;
 
     for (let j: number = 0; j < index; j++) {

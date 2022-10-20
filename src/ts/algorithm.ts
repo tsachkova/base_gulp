@@ -1,43 +1,31 @@
-type CallbackPrimitive<T> = (elementPrev: T, elementNext: T) => boolean;
+type CallbackSort<T> = (elementPrev: T, elementNext: T, property?: string) => boolean;
 
-type CallbackObject<T> = (elementPrev: T, elementNext: T, property: string) => boolean;
+type SortSignature<T> = (this: T[], callback: CallbackSort<T>, property?: string) => T[];
 
-interface ObjectType {
-    [key: string]: Primitive
-}
-
-type Primitive = number | string | boolean | Primitive[];
-
-type SortSignature<T> = (this: T[], callback: CallbackObject<T> | CallbackPrimitive<T>, property: string) => T[];
-
-let sortObjectArr: CallbackObject<ObjectType> = function (elementPrev, elementNext, property) {
+function sortObjectArr<T>(elementPrev: T, elementNext: T, property: string) {
     return (elementPrev[property] > elementNext[property]);
 }
 
-let sortPrimitiveArr: CallbackPrimitive<Primitive> = function (elementPrev, elementNext) {
+function sortPrimitiveArr<T>(elementPrev: T, elementNext: T) {
     return (elementPrev > elementNext);
 }
 
-let insertionSort: SortSignature<Primitive | ObjectType> =
-    function (this, callback, property) {
-        if (typeof callback !== 'function') {
-            throw new Error("callback is not a function");
+function insertionSort<T>(this: T[], callback: CallbackSort<T>, property?: string): T[] {
+
+    for (let i: number = 1; i < this.length; i++) {
+        let temporary: T = this[i];
+        let j: number = i - 1;
+
+        while ((j >= 0) && callback(this[j], temporary, property)) {
+            this[j + 1] = this[j];
+            j--;
         }
 
-        for (let i: number = 1; i < this.length; i++) {
-            let temporary: Primitive | ObjectType = this[i];
-            let j: number = i - 1;
-
-            while ((j >= 0) && callback(this[j], temporary, property)) {
-                this[j + 1] = this[j];
-                j--;
-            }
-
-            this[j + 1] = temporary;
-        }
-
-        return this;
+        this[j + 1] = temporary;
     }
+
+    return this;
+}
 
 declare interface Array<T> {
     insertionSort: SortSignature<T>
@@ -47,16 +35,13 @@ Array.prototype.insertionSort = insertionSort;
 
 //  //////////////////////////////////////////////////
 
-let bubbleSort: SortSignature<Primitive | ObjectType> = function (callback, property) {
-    if (typeof callback !== 'function') {
-        throw new Error("callback is not a function");
-    }
+function bubbleSort<T>(this: T[], callback: CallbackSort<T>, property?: string): T[] {
 
     for (let i: number = 0; i < this.length; i++) {
-        for (let j: number = 0; j < this.length - i; j++) {
+        for (let j: number = 0; j < this.length - 1 - i; j++) {
 
             if (callback(this[j], this[j + 1], property)) {
-                let temporary: Primitive | ObjectType = this[j];
+                let temporary: T = this[j];
                 this[j] = this[j + 1];
                 this[j + 1] = temporary;
             }
