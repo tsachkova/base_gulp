@@ -59,26 +59,19 @@ Array.prototype.bubbleSort = bubbleSort;
 
 //  /////////////////////////////////////////////////
 
-interface NodeInterface<T> {
-    nodeValue: T | null,
-    left: null | NodeInterface<T>,
-    right: null | NodeInterface<T>,
-    add: (nodeValue: T, node?: NodeInterface<T>) => void | never;
-    search: (nodeValue: T, node?: NodeInterface<T>) => never | NodeInterface<T>;
-    delete: (nodeValue: T, node: NodeInterface<T>, parentNode: NodeInterface<T> | null, minElement?: NodeInterface<T>) => void | never;
-}
+type NodeArgument = number | string | number[] | string[]
 
-class binaryNode<T> implements NodeInterface<T>{
-    nodeValue: T | null;
-    left: null | NodeInterface<T>;
-    right: null | NodeInterface<T>;
-    constructor(nodeValue: T | null) {
+class binaryNode<NodeArgument> {
+    nodeValue: NodeArgument | null;
+    left: null | binaryNode<NodeArgument>;
+    right: null | binaryNode<NodeArgument>;
+    constructor(nodeValue: NodeArgument | null) {
         this.nodeValue = nodeValue;
         this.left = null;
         this.right = null;
     }
 
-    add(nodeValue: T, node?: NodeInterface<T>) {
+    add(nodeValue: NodeArgument, node?: binaryNode<NodeArgument>) {
         node = node || this;
         if (node.nodeValue === null) {
             node.nodeValue = nodeValue;
@@ -112,7 +105,7 @@ class binaryNode<T> implements NodeInterface<T>{
         }
     }
 
-    search(nodeValue: T, node?: NodeInterface<T>) {
+    search(nodeValue: NodeArgument, node?: binaryNode<NodeArgument>) {
         node = node || this;
 
         if (node.nodeValue === nodeValue) {
@@ -142,7 +135,7 @@ class binaryNode<T> implements NodeInterface<T>{
         }
     }
 
-    delete(nodeValue: T, carentNode: NodeInterface<T> = this, parentNode: NodeInterface<T> | null = null, minElement: NodeInterface<T> = carentNode) {
+    delete(nodeValue: NodeArgument, carentNode: binaryNode<NodeArgument> = this, parentNode: binaryNode<NodeArgument> | null = null, minElement: binaryNode<NodeArgument> = carentNode) {
         if (typeof nodeValue !== typeof this.nodeValue) {
             throw new Error("Value is not found");
         }
@@ -270,4 +263,6 @@ class binaryNode<T> implements NodeInterface<T>{
     }
 }
 
-let binaryTree: binaryNode<null> = new binaryNode(null);
+
+
+let binaryTree: binaryNode<NodeArgument> = new binaryNode<NodeArgument>(null);
