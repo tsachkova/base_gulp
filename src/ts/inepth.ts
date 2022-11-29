@@ -12,10 +12,6 @@ function customMap<T, Q>(this: T[], callback: Mapcallback<T, Q>): Q[] {
     return result;
 }
 
-declare interface Array<T> {
-    customMap<T, Q>(this: T[], callback: Mapcallback<T, Q>): Q[]
-}
-
 Array.prototype.customMap = customMap;
 
 // /////////////////////////////////
@@ -35,9 +31,7 @@ function customFilter<T>(this: T[], callback: CallbackFilter<T>): T[] {
     return result;
 }
 
-declare interface Array<T> {
-    customFilter<T>(this: T[], callback: CallbackFilter<T>): T[]
-}
+
 
 Array.prototype.customFilter = customFilter;
 
@@ -64,10 +58,6 @@ function customReduce<T, Q>(this: T[], callback: ReduceCallback<T, Q>, initialVa
     return previous;
 }
 
-declare interface Array<T> {
-    customReduce<T, Q>(this: T[], callback: ReduceCallback<T, Q>, initialValue: Q): Q | T
-}
-
 Array.prototype.customReduce = customReduce;
 
 // ////////////////////////////////////////////////////////
@@ -83,10 +73,6 @@ function customFind<T>(this: T[], callback: FindCallback<T>): T | undefined {
     }
 }
 
-declare interface Array<T> {
-    customFind<T>(this: T[], callback: FindCallback<T>): T | undefined
-}
-
 Array.prototype.customFind = customFind;
 
 // /////////////////////////////////////////////
@@ -100,12 +86,15 @@ function customForEach<T>(this: T[], callback: ForEachCollback<T>): void {
     }
 }
 
-declare interface Array<T> {
-    customForEach<T>(this: T[], callback: ForEachCollback<T>): void
-}
-
 Array.prototype.customForEach = customForEach;
 
+declare interface Array<T> {
+    customForEach<T>(this: T[], callback: ForEachCollback<T>): void;
+    customMap<T, Q>(this: T[], callback: Mapcallback<T, Q>): Q[];
+    customFilter<T>(this: T[], callback: CallbackFilter<T>): T[];
+    customReduce<T, Q>(this: T[], callback: ReduceCallback<T, Q>, initialValue: Q): Q | T;
+    customFind<T>(this: T[], callback: FindCallback<T>): T | undefined;
+}
 
 // ///////////////////////////////////////////
 
@@ -114,7 +103,7 @@ type BindCustome = (customThis: object, ...rest: []) => (arg?: []) => Function;
 let customBind: BindCustome = function (this: Function, customThis: object, ...rest: []) {
     let targetFunc: Function = this;
 
-    return function context(args:[]|undefined) {
+    return function context(args: [] | undefined) {
         let keyName: symbol = Symbol('keyName');
         customThis[keyName] = targetFunc;
         let resultFunc: Function = customThis[keyName](...rest, args);
@@ -123,15 +112,11 @@ let customBind: BindCustome = function (this: Function, customThis: object, ...r
     };
 }
 
-declare interface Function {
-    customBind: BindCustome
-}
-
 Function.prototype.customBind = customBind;
 
 // //////////////////////////////////////////
 
-type CallCustome = (this: Function, customThis: object, ...rest: []) => void
+type CallCustome = (this: Function, customThis: object, ...rest: []) => void;
 
 let customCall: CallCustome = function (customThis: object, ...rest: []) {
     let keyName: symbol = Symbol('keyName');
@@ -140,8 +125,9 @@ let customCall: CallCustome = function (customThis: object, ...rest: []) {
     delete customThis[keyName];
 }
 
-declare interface Function {
-    customCall: CallCustome
-}
-
 Function.prototype.customCall = customCall;
+
+declare interface Function {
+    customCall: CallCustome;
+    customBind: BindCustome;
+}

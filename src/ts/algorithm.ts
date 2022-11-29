@@ -27,10 +27,6 @@ function insertionSort<T>(this: T[], callback: CallbackSort<T>, property?: strin
     return this;
 }
 
-declare interface Array<T> {
-    insertionSort: SortSignature<T>
-}
-
 Array.prototype.insertionSort = insertionSort;
 
 //  //////////////////////////////////////////////////
@@ -51,72 +47,83 @@ function bubbleSort<T>(this: T[], callback: CallbackSort<T>, property?: string):
     return this;
 }
 
-declare interface Array<T> {
-    bubbleSort: SortSignature<T>
-}
-
 Array.prototype.bubbleSort = bubbleSort;
 
-//  /////////////////////////////////////////////////
+declare interface Array<T> {
+    bubbleSort: SortSignature<T>;
+    insertionSort: SortSignature<T>
+}
 
-type NodeArgument = number | string | number[] | string[]
+type params = number | string | symbol;
 
-class binaryNode<NodeArgument> {
-    nodeValue: NodeArgument | null;
-    left: null | binaryNode<NodeArgument>;
-    right: null | binaryNode<NodeArgument>;
-    constructor(nodeValue: NodeArgument | null) {
+class binaryNode<T> {
+    nodeValue: T | null;
+    left: null | binaryNode<T>;
+    right: null | binaryNode<T>;
+    key?: string;
+    constructor(nodeValue: T, key?: string) {
         this.nodeValue = nodeValue;
         this.left = null;
         this.right = null;
+        if (key) {
+            this.key = key;
+        }
     }
 
-    add(nodeValue: NodeArgument, node?: binaryNode<NodeArgument>) {
+    compare(carentValue: T, parentValue: T): boolean | void {
+        if (this.key) {
+            if (carentValue[this.key] === parentValue[this.key]) {
+                return;
+            }
+            return (carentValue[this.key] > parentValue[this.key]);
+        }
+        if (carentValue === parentValue) {
+            return;
+        }
+        return (carentValue > parentValue);
+    }
+
+    add(nodeValue: T, node?: binaryNode<T>) {
         node = node || this;
         if (node.nodeValue === null) {
             node.nodeValue = nodeValue;
             return;
-        } else {
-
-            if (nodeValue > node.nodeValue) {
-
-                if (node.right !== null) {
-                    return this.add(nodeValue, node.right);
-                }
-
-                node.right = new binaryNode(nodeValue);
-
-                return;
-            }
-
-            if (nodeValue < node.nodeValue) {
-
-                if (node.left !== null) {
-                    return this.add(nodeValue, node.left);
-                }
-
-                node.left = new binaryNode(nodeValue);
-                return;
-            }
-
-            if (nodeValue = node.nodeValue) {
-                throw new Error("nodeValue is duplicated");
-            }
         }
+
+        if (this.compare(nodeValue, node.nodeValue)) {
+            if (node.right !== null) {
+                return this.add(nodeValue, node.right);
+            }
+
+            node.right = new binaryNode(nodeValue);
+
+            return;
+        } else if (this.compare(nodeValue, node.nodeValue) === false) {
+
+            if (node.left !== null) {
+                return this.add(nodeValue, node.left);
+            }
+
+            node.left = new binaryNode(nodeValue);
+            return;
+        }
+
+        throw new Error("nodeValue is duplicated");
+
     }
 
-    search(nodeValue: NodeArgument, node?: binaryNode<NodeArgument>) {
+    search(nodeValue: T, node?: binaryNode<T>) {
         node = node || this;
-
-        if (node.nodeValue === nodeValue) {
-            return node;
-        }
 
         if (!node.nodeValue) {
             throw new Error("there are no values in the tree");
         }
 
-        if (nodeValue > node.nodeValue) {
+        if (this.compare(nodeValue, node.nodeValue) === undefined) {
+            return node;
+        }
+
+        if (this.compare(nodeValue, node.nodeValue)) {
 
             if (node.right === null) {
                 throw new Error("nodeValue is not found");
@@ -125,17 +132,15 @@ class binaryNode<NodeArgument> {
             return this.search(nodeValue, node.right);
         }
 
-        if (nodeValue < node.nodeValue) {
-
-            if (node.left === null) {
-                throw new Error("nodeValue is not found");
-            }
-
-            return this.search(nodeValue, node.left);
+        if (node.left === null) {
+            throw new Error("nodeValue is not found");
         }
+
+        return this.search(nodeValue, node.left);
+
     }
 
-    delete(nodeValue: NodeArgument, carentNode: binaryNode<NodeArgument> = this, parentNode: binaryNode<NodeArgument> | null = null, minElement: binaryNode<NodeArgument> = carentNode) {
+    delete(nodeValue: T, carentNode: binaryNode<T> = this, parentNode: binaryNode<T> | null = null, minElement: binaryNode<T> = carentNode) {
         if (typeof nodeValue !== typeof this.nodeValue) {
             throw new Error("Value is not found");
         }
@@ -144,7 +149,7 @@ class binaryNode<NodeArgument> {
             throw new Error("there are no values in the tree");
         }
 
-        if (nodeValue > carentNode.nodeValue) {
+        if (this.compare(nodeValue, carentNode.nodeValue)) {
 
             if (carentNode.right === null) {
                 throw new Error("Value is not found");
@@ -155,7 +160,7 @@ class binaryNode<NodeArgument> {
             return this.delete(nodeValue, carentNode, parentNode);
         }
 
-        if (nodeValue < carentNode.nodeValue) {
+        if (this.compare(nodeValue, carentNode.nodeValue) === false) {
 
             if (carentNode.left === null) {
                 throw new Error("nodeValue is not found");
@@ -167,7 +172,7 @@ class binaryNode<NodeArgument> {
             return this.delete(nodeValue, carentNode, parentNode);
         }
 
-        if (nodeValue === carentNode.nodeValue) {
+        if (this.compare(nodeValue, carentNode.nodeValue) === undefined) {
 
             if ((carentNode.left === null) && (carentNode.right === null)) {
 
@@ -262,7 +267,3 @@ class binaryNode<NodeArgument> {
         }
     }
 }
-
-
-
-let binaryTree: binaryNode<NodeArgument> = new binaryNode<NodeArgument>(null);

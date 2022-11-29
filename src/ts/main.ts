@@ -18,15 +18,15 @@ function isAnagramm(str1: string, str2: string): boolean {
 
 // Написать функцию которая вычисляет подсчет количество цифр в числе. Реализовать с помощью рекурсии.
 
-function digitInNamber(number: number, index: number): number {
+function digitInNamber(value: number, index: number): number {
 
-    number = Math.abs(number);
+    value = Math.abs(value);
     index = index || 1;
 
-    if (number / Math.pow(10, index) < 1) {
+    if (value / Math.pow(10, index) < 1) {
         return (index);
     }
-    return digitInNamber(number, index + 1);
+    return digitInNamber(value, index + 1);
 }
 
 // Реализовать функцию которая проверяет, является ли строка палиндромом
@@ -124,7 +124,7 @@ abstract class Figure {
 class RectangleClass extends Figure {
 
     constructor(public height: number, public width: number) {
-        super()
+        super();
         this.height = height;
         this.width = width;
     }
@@ -141,14 +141,14 @@ class RectangleClass extends Figure {
 class TriangClass extends Figure {
 
     constructor(public sideA: number, public sideB: number, public sideC: number) {
-        super()
+        super();
         this.sideA = sideA;
         this.sideB = sideB;
         this.sideC = sideC;
     }
 
     getSquare() {
-        let halfPer:number = (this.sideA + this.sideB + this.sideC) / 2;
+        let halfPer: number = (this.sideA + this.sideB + this.sideC) / 2;
         return (Math.sqrt(halfPer * (halfPer - this.sideA) * (halfPer - this.sideB) * (halfPer - this.sideC)));
     }
 
@@ -160,7 +160,7 @@ class TriangClass extends Figure {
 class CircleClass extends Figure {
 
     constructor(public radius: number) {
-        super()
+        super();
         this.radius = radius;
     }
 
@@ -193,7 +193,7 @@ interface CashCalculetion {
     [key: string]: number
 }
 
-type FactorialCalc = (customNumber: number, result?: number) => CashCalculetion
+type FactorialCalc = (customNumber: number, result?: number) => CashCalculetion;
 
 function factorialCash(): FactorialCalc {
 
@@ -230,10 +230,10 @@ let memoiz: () => (customNumber: number) => number = function () {
             return cash[customNumber];
         }
 
-        let result:CashCalculetion = factorial(customNumber);
+        let result: CashCalculetion = factorial(customNumber);
         for (let key in result) {
             if (Number(key) > maxCash) {
-                cash[key] = result[key]
+                cash[key] = result[key];
             }
         }
         maxCash = customNumber;
@@ -242,11 +242,11 @@ let memoiz: () => (customNumber: number) => number = function () {
     }
 }
 
-let memoizFactoriale:(customNumber: number) => number = memoiz();
+let memoizFactoriale: (customNumber: number) => number = memoiz();
 
 //Посчитать сумму всех элементов массива, только тех которые (Кратные двум, кратные трем, которые только положительные и нечетные), реализовать с помощью рекурсии для одномерного массива.
 
-let evenItemCallback:(item: number) => number = function (item:number) {
+let evenItemCallback: (item: number) => number = function (item: number) {
 
     if (item % 2 === 0) {
         return item;
@@ -274,7 +274,7 @@ let oddPositivItemCallback = function (item: number): number {
 
 function sumArreyItem(arr: number[], callback?: (item: number) => number) {
 
-    let sum:number = 0;
+    let sum: number = 0;
     for (let i: number = 0; i < arr.length; i++) {
         if (!callback) {
             sum += arr[i];
@@ -355,7 +355,7 @@ function primeNumb(arr: number[]) {
             }
 
             if (isPrimeNumb) {
-                count++
+                count++;
             } else {
                 isPrimeNumb = true;
             }
@@ -470,7 +470,7 @@ function sumNumberMinMaxPositiv(min: number, max: number, sum?: number): number 
 
 function sumNumberMinMaxCycle(min: number, max: number): number {
 
-    let sum:number = 0;
+    let sum: number = 0;
 
     for (let i: number = min + 1; i < max; i++) {
         sum = sum + i;
@@ -488,8 +488,8 @@ interface Result {
 
 function averageArrey(arr: number[]): Result {
 
-    let sum:number = 0;
-    let count:number = 0;
+    let sum: number = 0;
+    let count: number = 0;
 
     for (let j: number = 0; j < arr.length; j++) {
         sum += arr[j];
@@ -501,8 +501,8 @@ function averageArrey(arr: number[]): Result {
 }
 
 function averageEvenArrey(arr: number[]): Result {
-    let sum:number = 0;
-    let count:number = 0;
+    let sum: number = 0;
+    let count: number = 0;
 
     for (let j: number = 0; j < arr.length; j++) {
         if (arr[j] % 2 === 0) {
@@ -515,8 +515,8 @@ function averageEvenArrey(arr: number[]): Result {
 }
 
 function avarageOddSum(arr: number[]): Result {
-    let sum:number = 0;
-    let count:number = 0;
+    let sum: number = 0;
+    let count: number = 0;
 
     for (let j: number = 0; j < arr.length; j++) {
         if (arr[j] % 2 !== 0) {
@@ -531,8 +531,8 @@ function avarageOddSum(arr: number[]): Result {
 
 
 function averageDoubleArrey(arr: number[][], callback: (arrIn: number[]) => Result): number {
-    let sumDoubleArrey:number = 0;
-    let countDoubleArrey:number = 0;
+    let sumDoubleArrey: number = 0;
+    let countDoubleArrey: number = 0;
 
     for (let i: number = 0; i < arr.length; i++) {
         let { sum, count } = callback(arr[i]);
@@ -633,7 +633,7 @@ function deleteColumnNull(arr: Matrix, index?: number): Matrix {
 
 type Callback = (arr: number[], i: number) => number;
 
-let underDiagonalMatrixSum: Callback = function (arr:number[], index:number) {
+let underDiagonalMatrixSum: Callback = function (arr: number[], index: number) {
     let sum: number = 0;
 
     for (let j: number = arr.length - 1; j > index; j--) {
@@ -643,7 +643,7 @@ let underDiagonalMatrixSum: Callback = function (arr:number[], index:number) {
     return sum;
 }
 
-let overDiagonalMatrixSum: Callback = function (arr:number[], index:number) {
+let overDiagonalMatrixSum: Callback = function (arr: number[], index: number) {
     let sum: number = 0;
 
     for (let j: number = 0; j < index; j++) {
@@ -653,7 +653,7 @@ let overDiagonalMatrixSum: Callback = function (arr:number[], index:number) {
     return sum;
 }
 
-let countNullUnderDiagonalMatrix: Callback = function (arr:number[], index:number) {
+let countNullUnderDiagonalMatrix: Callback = function (arr: number[], index: number) {
     let count: number = 0;
 
     for (let j: number = arr.length - 1; j > index; j--) {
@@ -665,7 +665,7 @@ let countNullUnderDiagonalMatrix: Callback = function (arr:number[], index:numbe
     return count;
 }
 
-let countNullOverDiagonalMatrix: Callback = function (arr:number[], index:number) {
+let countNullOverDiagonalMatrix: Callback = function (arr: number[], index: number) {
     let count: number = 0;
 
     for (let j: number = 0; j < index; j++) {
@@ -688,7 +688,7 @@ function calculationMatrix(matrix: Matrix, callback: Callback) {
     let resultAll: number = 0;
 
     for (let i: number = 0; i < matrix.length; i++) {
-        let matrixString:number[] = matrix[i];
+        let matrixString: number[] = matrix[i];
         resultAll += callback(matrixString, i);
     }
 
@@ -838,7 +838,7 @@ let fibonachiIterator: FibonachiIterator = {
 
 let i: number = 0;
 for (let num of fibonachiIterator) {
-    console.log(num)
+    console.log(num);
     if (i++ > 10)
         break;
 }
@@ -863,7 +863,7 @@ function* fibonachiGenerator() {
     }
 }
 
-let generator:Generator<number, void, unknown> = fibonachiGenerator();
+let generator: Generator<number, void, unknown> = fibonachiGenerator();
 
 function recursFibonachi(index: number, arr?: number[], numb2?: number, res?: number): number[] {
 
@@ -913,7 +913,7 @@ function* trafficLightGenerator(): Generator<"red" | "yellow" | "green", void> {
     }
 }
 
-let trafficLight:Generator<"red" | "yellow" | "green", void, unknown> = trafficLightGenerator();
+let trafficLight: Generator<"red" | "yellow" | "green", void, unknown> = trafficLightGenerator();
 
 let index: number = 0;
 while (true) {
@@ -927,7 +927,7 @@ interface NextString {
     value?: string | undefined
 }
 
-let trafficLightIterator:{
+let trafficLightIterator: {
     num: number;
     colors: string[];
     [Symbol.iterator]();
