@@ -51,10 +51,8 @@ Array.prototype.bubbleSort = bubbleSort;
 
 declare interface Array<T> {
     bubbleSort: SortSignature<T>;
-    insertionSort: SortSignature<T>
+    insertionSort: SortSignature<T>;
 }
-
-type params = number | string | symbol;
 
 class binaryNode<T> {
     nodeValue: T | null;
@@ -65,6 +63,7 @@ class binaryNode<T> {
         this.nodeValue = nodeValue;
         this.left = null;
         this.right = null;
+
         if (key) {
             this.key = key;
         }
@@ -85,12 +84,14 @@ class binaryNode<T> {
 
     add(nodeValue: T, node?: binaryNode<T>) {
         node = node || this;
+
         if (node.nodeValue === null) {
             node.nodeValue = nodeValue;
             return;
         }
 
         if (this.compare(nodeValue, node.nodeValue)) {
+
             if (node.right !== null) {
                 return this.add(nodeValue, node.right);
             }
@@ -109,7 +110,6 @@ class binaryNode<T> {
         }
 
         throw new Error("nodeValue is duplicated");
-
     }
 
     search(nodeValue: T, node?: binaryNode<T>) {
@@ -137,7 +137,6 @@ class binaryNode<T> {
         }
 
         return this.search(nodeValue, node.left);
-
     }
 
     delete(nodeValue: T, carentNode: binaryNode<T> = this, parentNode: binaryNode<T> | null = null, minElement: binaryNode<T> = carentNode) {
@@ -249,7 +248,7 @@ class binaryNode<T> {
                     parentNode = minElement;
                     minElement = minElement.left;
 
-                    return this.delete(nodeValue, carentNode, parentNode, minElement)
+                    return this.delete(nodeValue, carentNode, parentNode, minElement);
                 }
 
                 if (minElement.left === null && parentNode) {
